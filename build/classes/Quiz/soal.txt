@@ -1,0 +1,7 @@
+pilgan,Bahasa pemrograman apa saja yang sudah termasuk dalam OOP?,C Language,Sass,Java,HTML,CSS,C
+pilgan,Terdapat 2 Paradigma yang penting dan Populer yaitu?,Pemrograman Individual & OOP,Pemrograman Prosedural & Individual,Pemrograman Sistematis & Individual,Pemrograman Prosedural & OOP,Pemrograman Sistematis & OOP,D
+pilgan,Berikut pernyataan mengapa kita lebih dominan menggunakan Pemrograman berbasis OO Kecuali?,Lebih Mudah digunakan,Menambah Kerumitan,Melacak Kesalahan pada kode program lebih mudah,Dapat digunakan kembali kode program yang pernah di buat (Reusable code),Program lebih kompleks dengan kode yang lebih sedikit,B
+truefalse,Untuk menjalankan suatu program dengan menggunakan Code Java diharuskan memiliki JDK terlebih dahulu,True,False,B
+truefalse,Untuk menjalankan Code Java pada Inputan (“Hello World!”) agar berhasil dengan Output Hello World! maka menggunakan System.out.println(“Hello World!”),True,False,A
+truefalse,Sintaks java untuk melakukan kompilasi terhadap berkas program adalah Javac,True,False,A
+
