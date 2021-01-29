@@ -143,7 +143,7 @@ public class PilihanGanda implements Soal {
 //            bufferOutput.newLine();
 //            bufferOutput.flush();
 //        }
-//        System.out.println("NILAI AKHIR ANDA => " + this.nilai);
+        System.out.println("NILAI AKHIR ANDA => " + nomorData);
     }
 
     @Override
