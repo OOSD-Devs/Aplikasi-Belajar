@@ -6,6 +6,7 @@
 package Quiz;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -17,20 +18,43 @@ import java.util.StringTokenizer;
 public class PilihanGanda implements Soal {
 
     private String jawaban;
+    private String Id;
     private String OptionA;
     private String OptionB;
     private String OptionC;
     private String OptionD;
 
+    private String OptionE;
+    private String Soal;
+
     public PilihanGanda() {
     }
 
-    public PilihanGanda(String jawaban, String OptionA, String OptionB, String OptionC, String OptionD) {
+    public PilihanGanda(String jawaban, String Id,String OptionA, String OptionB, String OptionC, String OptionD, String OptionE, String Soal) {
         this.jawaban = jawaban;
+        this.Id = Id;
         this.OptionA = OptionA;
         this.OptionB = OptionB;
         this.OptionC = OptionC;
         this.OptionD = OptionD;
+        this.OptionD = OptionE;
+        this.Soal = Soal;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public String getSoal() {
+        return Soal;
+    }
+
+    public void setSoal(String Soal) {
+        this.Soal = Soal;
     }
 
     public String getJawaban() {
@@ -73,60 +97,58 @@ public class PilihanGanda implements Soal {
         this.OptionD = OptionD;
     }
 
-    @Override
-    public void checkJawaban() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getOptionE() {
+        return OptionE;
+    }
+
+    public void setOptionE(String OptionE) {
+        this.OptionE = OptionE;
     }
 
     @Override
-    public void showSoal() throws IOException {
+    public boolean checkJawaban(String input, String answer) throws IOException{
+        if(input.equalsIgnoreCase(answer)) return true;
+        return false;
+    }
+
+
+    @Override
+    public String getPath() {
+        return dataPath; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<PilihanGanda> showSoal() throws IOException {
         FileReader fileInput;
-        BufferedReader bufferInput;
+        BufferedReader bufferInput = null;
+
+        ArrayList<PilihanGanda> pilihanGanda = new ArrayList<PilihanGanda>();
 
         try {
             fileInput = new FileReader(getPath());
             bufferInput = new BufferedReader(fileInput);
-        } catch (Exception err) {
+        } catch (FileNotFoundException err) {
             System.err.println("Database Tidak ditemukan");
-            System.err.println("Silahkan tambah data terlebih dahulu");
-            return;
         }
 
         String data = bufferInput.readLine();
 
-        Scanner terminalInput = new Scanner(System.in);
-        String jawaban[] = new String[100];
-        int nomorData = 0;
+        int nomorData = 1;
 
         while (data != null) {
 
             StringTokenizer stringToken = new StringTokenizer(data, ",");
 
-            System.out.printf("(%d)\n", nomorData + 1);
-
             if (stringToken.nextToken().equalsIgnoreCase("pilgan")) {
-                System.out.println(stringToken.nextToken());
-                System.out.println("A. " + stringToken.nextToken());
-                System.out.println("B. " + stringToken.nextToken());
-                System.out.println("C. " + stringToken.nextToken());
-                System.out.println("D. " + stringToken.nextToken());
-                System.out.println("E. " + stringToken.nextToken());
-                System.out.println("Jawaban : ");
-                jawaban[nomorData] = terminalInput.nextLine();
-//                if (stringToken.nextToken().equalsIgnoreCase(jawaban[nomorData])) {
-//                    this.nilai += 1;
-//                }
-                System.out.print("\n");
-            } else {
-                System.out.println(stringToken.nextToken());
-                System.out.println("A. " + stringToken.nextToken());
-                System.out.println("B. " + stringToken.nextToken());
-                System.out.println("Jawaban : ");
-                jawaban[nomorData] = terminalInput.nextLine();
-//                if (stringToken.nextToken().equalsIgnoreCase(jawaban[nomorData])) {
-//                    this.nilai += 1;
-//                }
-                System.out.print("\n");
+                PilihanGanda temp = new PilihanGanda();
+                temp.setSoal(stringToken.nextToken());
+                temp.setOptionA(stringToken.nextToken());
+                temp.setOptionB(stringToken.nextToken());
+                temp.setOptionC(stringToken.nextToken());
+                temp.setOptionD(stringToken.nextToken());
+                temp.setOptionE(stringToken.nextToken());
+                temp.setJawaban(stringToken.nextToken());
+                temp.setId(Integer.toString(nomorData));
+                pilihanGanda.add(temp);
             }
 
             data = bufferInput.readLine();
@@ -134,27 +156,7 @@ public class PilihanGanda implements Soal {
             nomorData++;
         }
 
-//        FileWriter fileOutput = new FileWriter(this.getPathNilai(), true);
-//        BufferedWriter bufferOutput = new BufferedWriter(fileOutput);
-//        float hasil = (nilai * 100 / nomorData) ;
-//        boolean isTambah = utils.getYesOrNo("Apakah akan ingin menambah data tersebut? ");
-//        if (isTambah) {
-//            bufferOutput.write(bio1.getNama() + "," + bio1.getNim() + "," + Double.toString(hasil));
-//            bufferOutput.newLine();
-//            bufferOutput.flush();
-//        }
-        System.out.println("NILAI AKHIR ANDA => " + nomorData);
-    }
-
-    @Override
-    public String getPath() {
-        return dataPath; //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public static void main(String[] args) throws IOException{
-        PilihanGanda pil = new PilihanGanda();
-        
-        pil.showSoal();
+        return pilihanGanda;
     }
 
 }

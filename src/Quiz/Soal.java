@@ -6,6 +6,7 @@
 package Quiz;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +16,8 @@ public interface Soal {
 
     public static final String dataPath = "src/Quiz/soal.txt";
 
-    void checkJawaban() throws IOException;
-
-    void showSoal() throws IOException;
+    public boolean checkJawaban(String input, String answer) throws IOException;
     
     abstract String getPath();
+    
 }

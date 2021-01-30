@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package aplikasibelajar;
+
 import Quiz.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author zicoa
@@ -15,10 +18,9 @@ public class AplikasiBelajar {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException{
-        PilihanGanda pil = new PilihanGanda();
-        
-        pil.showSoal();
+    public static void main(String[] args) throws IOException {
+        Quiz quio = new Quiz();
+        quio.tampilkanSoal();
     }
-    
+
 }
