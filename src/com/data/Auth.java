@@ -12,8 +12,6 @@ import java.io.IOException;
  * @author Jerry Pangaribuan
  */
 public interface Auth {
-    boolean login() throws IOException;
-    
     void register() throws IOException;
     
     boolean logout();

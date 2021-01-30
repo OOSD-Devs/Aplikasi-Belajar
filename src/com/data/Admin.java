@@ -5,7 +5,6 @@
  */
 package com.data;
 
-import static com.data.Mahasiswa.cariDiDatabase;
 import static com.data.Mahasiswa.yaAtauTidak;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -25,7 +25,60 @@ public class Admin extends User implements Auth{
     public Admin() {
     }
     
-    @Override
+    public ArrayList<Admin> loginAdmin() throws IOException{
+        try{
+            File file = new File("Mahasiswa.txt");
+        }catch(Exception e){
+            System.out.println("Database tidak ditemukan");
+            System.out.println("Silahkan register terlebih dahulu!");
+            System.out.println(e);
+        }
+        
+        Scanner userInput = new Scanner(System.in);
+        
+        String username;
+        String password;
+        
+        System.out.print("Masukkan Username: ");
+        username = userInput.next();
+        System.out.print("Masukkan Password: ");
+        password = userInput.next();
+        
+        ArrayList<Admin> isExist = cari(username, password);
+        
+        return isExist;
+    }
+    
+    public ArrayList<Admin> cari(String username, String password) throws IOException{
+        FileReader fileInput = new FileReader("Admin.txt");
+        BufferedReader bufferInput = new BufferedReader(fileInput);
+        
+        String data = bufferInput.readLine();
+        boolean isExist = false;
+        ArrayList<Admin> bio = new ArrayList<Admin>();
+        
+        
+        while(data != null){
+            
+            StringTokenizer stringToken = new StringTokenizer(data, ",");
+            
+            if(stringToken.nextToken().equalsIgnoreCase(username) && stringToken.nextToken().equalsIgnoreCase(password)){
+                Admin adm = new Admin();
+                JenisKelamin jk;
+                
+                adm.setNama(stringToken.nextToken());
+                jk = JenisKelamin.valueOf(stringToken.nextToken());
+                adm.setJenisKelamin(jk);
+                
+                bio.add(adm);
+            }
+            
+            data = bufferInput.readLine();
+        }
+        
+        return bio;
+    }
+    
     public boolean login() throws IOException{
         try{
             File file = new File("Admin.txt");
@@ -123,7 +176,7 @@ public class Admin extends User implements Auth{
         boolean isRegister = yaAtauTidak("Apakah anda yakin ingin menambah data tersebut");
         
         if(isRegister){
-            bufferOutput.write(adm.getNama() + "," + adm.getJenisKelamin() + "," + adm.getUsername() + "," + adm.getPassword());
+            bufferOutput.write(adm.getUsername() + "," + adm.getPassword() + "," + adm.getNama() + "," + adm.getJenisKelamin());
             bufferOutput.newLine();
             bufferOutput.flush();
         }

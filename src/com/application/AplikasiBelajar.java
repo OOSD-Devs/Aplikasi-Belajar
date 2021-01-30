@@ -8,6 +8,7 @@ package com.application;
 import com.data.Admin;
 import com.data.Mahasiswa;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,8 @@ import java.util.Scanner;
  * @author Jerry Pangaribuan
  */
 public class AplikasiBelajar {
+    ArrayList<Mahasiswa> mhs;
+    
     public static void main(String[] args) throws IOException {
         
         Scanner userInput = new Scanner(System.in);
@@ -26,6 +29,17 @@ public class AplikasiBelajar {
             if(login){
                 if(peran == 1){
                     System.out.println("Sudah login sebagai mahasiswa");
+                    System.out.println("1. Quiz");
+                    System.out.println("2. Lihat Daftar Nilai");
+                    System.out.println("3. Logout");
+                    int choice = userInput.nextInt();
+                    
+                    switch(choice){
+                        case 3:
+                            Mahasiswa mhs = new Mahasiswa();
+                            login = mhs.logout();
+                            break;
+                    }
 
                     lanjutkan = yaAtauTidak("Apakah anda ingin melanjutkan");
                 }else if(peran == 2){
@@ -56,7 +70,13 @@ public class AplikasiBelajar {
                     switch(pilihan){
                         case 1:
                             System.out.println("\n==== LOGIN ====");
-                            login = mhs.login();
+                            ArrayList<Mahasiswa> log = mhs.loginMahasiswa();
+                            for(Mahasiswa m: log){
+                                System.out.println(m.getNama());
+                            }
+                            if(log.size() == 1){
+                                login = true;
+                            }
                             System.out.println(login);
                             break;
                         case 2:
@@ -77,7 +97,13 @@ public class AplikasiBelajar {
                     switch(pilihan){
                         case 1:
                             System.out.println("\n==== LOGIN ====");
-                            login  = adm.login();
+                            ArrayList<Admin> log = adm.loginAdmin();
+                            for(Admin a: log){
+                                System.out.println(a.getNama());
+                            }
+                            if(log.size() == 1){
+                                login = true;
+                            }
                             System.out.println(login);
                             break;
                         case 2:

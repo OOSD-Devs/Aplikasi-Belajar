@@ -13,7 +13,7 @@ public enum JenisProdi {
     D4TRPL{
         @Override
         public String toString() {
-            return "D4 Teknologi Rekayasa Perangkat Lunak";
+            return "D4TRPL";
         }
     },
     D3TI{

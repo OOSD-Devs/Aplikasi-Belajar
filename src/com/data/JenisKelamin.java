@@ -13,7 +13,7 @@ public enum JenisKelamin {
     LAKILAKI{
         @Override
         public String toString() {
-            return "Laki-laki";
+            return "LAKILAKI";
         }
     },
     PEREMPUAN{
